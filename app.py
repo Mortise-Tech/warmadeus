@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+from flask.helpers import url_for
+from flask.signals import request_tearing_down
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from flask_sqlalchemy import SQLAlchemy
@@ -27,6 +29,10 @@ def index():
         db.session.add(Todo(todo_text=request.form['todo']))
         db.session.commit()
     return render_template('index.html', todos=Todo.query.all(), template_form=TodoForm())
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')

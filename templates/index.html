@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <style>
-        body {background-image: url('../images/handplanes.jpg');
+        body {background-image: url('/images/handplanes.jpg');
         background-color: rgb(85,107,47);}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warmade.us</title>
+<title>Warmade.us</title>
 </head>
 <body>
     <h1>Warmade.us</h1>
-
     {% for todo in todos %}
         <li>{{ todo.todo_text }}</li>
     {% endfor %}
