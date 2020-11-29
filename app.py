@@ -23,16 +23,18 @@ class TodoForm(FlaskForm):
 
 db.create_all()
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+'''
+@app.route('/home', methods=["GET", "POST"])
 def index():
     if 'todo' in request.form:
         db.session.add(Todo(todo_text=request.form['todo']))
         db.session.commit()
-    return render_template('index.html', todos=Todo.query.all(), template_form=TodoForm())
-
-@app.route('/home')
-def home():
-    return render_template('home.html')
+    return render_template('home.html', todos=Todo.query.all(), template_form=TodoForm())
+'''
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
