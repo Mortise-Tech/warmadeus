@@ -1,3 +1,5 @@
 venv/
 .vscode
 Dockerrun.aws.json
+ignore.py
+home.html
