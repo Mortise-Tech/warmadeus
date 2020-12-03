@@ -1,11 +1,9 @@
-import functools
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from warmade_site.models import veteran_db
+from ..models import Veteran
 
 auth_bp = Blueprint(
     'auth',
@@ -19,7 +17,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = veteran_db()
+        db = Veteran()
         error = None
 
         if not username:
@@ -48,7 +46,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = veteran_db()
+        db = Veteran()
         error = None
         user = db.execute(
             'SELECT * FROM user WHERE username = ?', (username,)
@@ -67,3 +65,8 @@ def login():
         flash(error)
 
     return render_template('login.html')
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))

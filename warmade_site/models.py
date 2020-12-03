@@ -1,13 +1,20 @@
-from warmade_site.app import db, Todo
+from . import app
+from flask_sqlalchemy import SQLAlchemy
 
-first_todo = Todo(todo_text="Create Website")
-
-db.session.add(first_todo)
+db = SQLAlchemy(app)
+"""
+db.session.add()
 db.session.commit()
-
-all_todo = Todo.query.all()
-print(all_todo[0].todo_text)
+"""
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     product_name = db.Column(db.String(50), index=True)
+
+class Veteran(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), index=True, unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
