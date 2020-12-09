@@ -1,19 +1,20 @@
+# warmade_site/__init__
+import os
 from flask import Flask
-from flask.helpers import url_for
+from flask_assets import Environment
 
-from .home.views import home_bp
-#from .auth.views import auth_bp
-from .about.views import about_bp
+def init_app():
+    # Create Flask app
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object('config.default') # use default config
+    app.config.from_pyfile('config.py') # settings from instance
+    #assets = Environment()
+    #assets.init_app(app)
 
+    # Register Blueprints
+    app.register_blueprint(home_bp)
 
-app = Flask(__name__, instance_relative_config=True)
-app.config.from_object('config.development') # use default config
-app.config.from_pyfile('config.py') # settings from instance
+    # Compile static assests
+    #compile_static_assets(assets)
 
-# Load the file specified by the APP_CONFIG_FILE environment variable
-#app.config.from_envvar('APP_CONFIG_FILE')
-
-
-app.register_blueprint(home_bp)
-#app.register_blueprint(auth_bp)
-app.register_blueprint(about_bp)
+    return app
