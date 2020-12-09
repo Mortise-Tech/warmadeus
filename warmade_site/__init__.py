@@ -11,6 +11,9 @@ def init_app():
     #assets = Environment()
     #assets.init_app(app)
 
+    # Import Blueprints
+    from .home.views import home_bp
+
     # Register Blueprints
     app.register_blueprint(home_bp)
 
