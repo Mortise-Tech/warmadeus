@@ -8,6 +8,7 @@ home_bp = Blueprint(
     template_folder='templates'
     )
 
-@home_bp.route('/')
+@home_bp.route('/', methods=["GET"])
 def index():
+    """HOMEPAGE."""
     return render_template('index.html')
